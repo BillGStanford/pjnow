@@ -1,0 +1,107 @@
+---
+import type { Article, Author } from '../../types';
+
+interface Props {
+  type: 'home' | 'article' | 'section';
+  article?: Article;
+  author?: Author;
+  section?: { name: string; description: string };
+}
+
+const { type, article, author, section } = Astro.props;
+const siteUrl = 'https://peoples-tribune.org';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: "The People's Tribune",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.svg`,
+  description: 'Marxist-Leninist analysis and anti-imperialist news',
+  sameAs: [],
+};
+
+let schemas: any[] = [organizationSchema];
+
+if (type === 'article' && article && author) {
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: article.title,
+    description: article.excerpt,
+    image: article.featuredImage ? `${siteUrl}${article.featuredImage.src}` : undefined,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt || article.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: author.name,
+      jobTitle: author.role,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: "The People's Tribune",
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/images/logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/articles/${article.slug}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Articles',
+        item: `${siteUrl}/articles`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: `${siteUrl}/articles/${article.slug}`,
+      },
+    ],
+  };
+
+  schemas.push(articleSchema, breadcrumbSchema);
+}
+
+if (type === 'section' && section) {
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: section.name,
+      },
+    ],
+  };
+
+  schemas.push(breadcrumbSchema);
+}
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

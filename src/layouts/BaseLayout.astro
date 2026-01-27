@@ -1,0 +1,41 @@
+---
+// src/layouts/BaseLayout.astro
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <slot name="head" />
+    
+    <!-- Google Analytics -->
+    <GoogleAnalytics />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    
+    <main class="flex-1">
+      <slot />
+    </main>
+    
+    <Footer />
+  </body>
+</html>

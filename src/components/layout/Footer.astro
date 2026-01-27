@@ -1,0 +1,89 @@
+---
+// short-singularity/src/components/layout/Footer.astro
+import sections from '../../data/sections.json';
+---
+
+<footer class="bg-secondary text-white mt-16">
+  <div class="container-custom py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- About -->
+      <div class="md:col-span-2">
+        <h3 class="text-xl font-serif font-bold mb-4">The People's Tribune</h3>
+        <p class="text-sm leading-relaxed mb-4">
+          A Marxist-Leninist newspaper committed to working-class journalism, 
+          anti-imperialist analysis, and the struggle for socialism.
+        </p>
+
+        <!-- YouTube -->
+        <div class="mt-6">
+          <a
+            href="https://www.youtube.com/@ThePeoplesTribune"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors"
+            aria-label="The People's Tribune on YouTube"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.118C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.393.568A2.99 2.99 0 0 0 .502 6.186 31.02 31.02 0 0 0 0 12a31.02 31.02 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.105 2.118C4.495 20.5 12 20.5 12 20.5s7.505 0 9.393-.568a2.99 2.99 0 0 0 2.105-2.118A31.02 31.02 0 0 0 24 12a31.02 31.02 0 0 0-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sections -->
+      <div>
+        <h3 class="text-lg font-serif font-bold mb-4">Sections</h3>
+        <ul class="space-y-2 text-sm">
+          {sections.map(section => (
+            <li>
+              <a 
+                href={`/sections/${section.slug}`}
+                class="hover:text-primary transition-colors"
+              >
+                {section.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact & Info -->
+      <div>
+        <h3 class="text-lg font-serif font-bold mb-4">Connect</h3>
+        <ul class="space-y-2 text-sm">
+          <li>
+            <a href="/about" class="hover:text-primary transition-colors">
+              About Us
+            </a>
+          </li>
+          <li>
+            <a href="/editorial-policy" class="hover:text-primary transition-colors">
+              Editorial Policy
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="hover:text-primary transition-colors">
+              Contact
+            </a>
+          </li>
+          <li>
+            <a href="/submit" class="hover:text-primary transition-colors">
+              Submit an Article
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+      <p>
+        &copy; {new Date().getFullYear()} The People's Tribune. 
+        All content is freely available for educational and organizing purposes.
+      </p>
+      <p class="mt-2 italic text-xs">
+        "The philosophers have only interpreted the world, in various ways. 
+        The point, however, is to change it." — Karl Marx
+      </p>
+    </div>
+  </div>
+</footer>

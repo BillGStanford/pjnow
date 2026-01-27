@@ -1,0 +1,224 @@
+---
+// short-singularity/src/components/layout/Header.astro
+import { Menu, X, ChevronDown, Search } from 'lucide-react';
+import sections from '../../data/sections.json';
+import { getCurrentDate } from '../../utils/date';
+
+const currentDate = getCurrentDate();
+const currentPath = Astro.url.pathname;
+
+// Group sections into categories for better organization
+const mainSections = sections.slice(0, 5);
+const moreSections = sections.slice(5);
+---
+
+<header class="bg-white border-b-2 border-primary sticky top-0 z-40">
+  <!-- Top Bar -->
+  <div class="border-b border-gray-200 py-2">
+    <div class="container-custom flex justify-between items-center text-sm">
+      <div class="text-gray-600 font-medium">{currentDate}</div>
+      <div class="flex items-center gap-4">
+<span class="text-primary font-medium">Newsletter</span>
+<span class="bg-primary text-white px-3 py-1 text-sm font-medium opacity-80">
+  By the Workers, For the Workers
+</span>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <div class="container-custom py-6">
+    <div class="flex justify-between items-center">
+      <a href="/" class="block">
+        <h1 class="masthead-title text-primary">
+          THE PEOPLE'S TRIBUNE
+        </h1>
+        <p class="text-sm uppercase tracking-widest mt-1 text-gray-700 font-medium">
+          Workers of the World, Unite!
+        </p>
+      </a>
+      
+      <div class="hidden lg:block">
+        <div class="relative">
+          <input 
+            type="search" 
+            id="desktop-search"
+            placeholder="Search articles..." 
+            class="border border-gray-300 rounded-md pl-10 pr-4 py-2 w-64 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+          />
+          <Search className="absolute left-3 top-2.5 text-gray-400 w-4 h-4" />
+          <button type="submit" class="absolute right-2 top-2.5 text-gray-400 hover:text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="bg-primary">
+    <div class="container-custom">
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center justify-between">
+        <ul class="flex items-center">
+          <li>
+            <a 
+              href="/" 
+              class={`text-white hover:bg-primary-dark font-medium transition-colors px-4 py-3 ${currentPath === '/' ? 'bg-primary-dark' : ''}`}
+            >
+              Home
+            </a>
+          </li>
+          {mainSections.map(section => (
+            <li>
+              <a 
+                href={`/sections/${section.slug}`}
+                class={`text-white hover:bg-primary-dark font-medium transition-colors px-4 py-3 ${currentPath.includes(section.slug) ? 'bg-primary-dark' : ''}`}
+              >
+                {section.name}
+              </a>
+            </li>
+          ))}
+          
+          <!-- More Sections Dropdown -->
+          {moreSections.length > 0 && (
+            <li class="relative group">
+              <button class="text-white hover:bg-primary-dark font-medium transition-colors px-4 py-3 flex items-center gap-1">
+                More
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div class="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-b-md w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                <div class="py-2">
+                  {moreSections.map(section => (
+                    <a 
+                      href={`/sections/${section.slug}`}
+                      class={`block px-4 py-2 hover:bg-gray-100 ${currentPath.includes(section.slug) ? 'bg-gray-100 text-primary font-medium' : ''}`}
+                    >
+                      {section.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </li>
+          )}
+        </ul>
+        
+        <div class="flex items-center gap-4">
+          <a href="/about" class="text-white hover:bg-primary-dark font-medium transition-colors px-4 py-3">
+            About
+          </a>
+          <a href="/contact" class="text-white hover:bg-primary-dark font-medium transition-colors px-4 py-3">
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Toggle -->
+      <div class="md:hidden py-3 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <button 
+            id="mobile-menu-button"
+            class="text-white p-2"
+            aria-label="Toggle menu"
+          >
+            <Menu className="w-6 h-6" id="menu-icon" />
+            <X className="w-6 h-6 hidden" id="close-icon" />
+          </button>
+          <span class="text-white font-medium">Menu</span>
+        </div>
+        
+        <button 
+          id="mobile-search-button"
+          class="text-white p-2"
+          aria-label="Toggle search"
+        >
+          <Search className="w-5 h-5" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white text-gray-800">
+      <div class="container-custom py-4">
+        <!-- Mobile Search -->
+        <div id="mobile-search" class="hidden mb-4">
+          <div class="relative">
+            <input 
+              type="search" 
+              placeholder="Search articles..." 
+              class="border border-gray-300 rounded-md pl-10 pr-4 py-2 w-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+            />
+            <Search className="absolute left-3 top-2.5 text-gray-400 w-4 h-4" />
+          </div>
+        </div>
+        
+        <ul class="space-y-1">
+          <li>
+            <a href="/" class={`block px-4 py-3 rounded-md ${currentPath === '/' ? 'bg-gray-100 text-primary font-medium' : 'hover:bg-gray-100'}`}>
+              Home
+            </a>
+          </li>
+          {sections.map(section => (
+            <li>
+              <a 
+                href={`/sections/${section.slug}`}
+                class={`block px-4 py-3 rounded-md ${currentPath.includes(section.slug) ? 'bg-gray-100 text-primary font-medium' : 'hover:bg-gray-100'}`}
+              >
+                {section.name}
+              </a>
+            </li>
+          ))}
+          <li class="border-t border-gray-200 mt-2 pt-2">
+            <a href="/about" class="block px-4 py-3 rounded-md hover:bg-gray-100">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="block px-4 py-3 rounded-md hover:bg-gray-100">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  menuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+
+  // Mobile search toggle
+  const searchButton = document.getElementById('mobile-search-button');
+  const mobileSearch = document.getElementById('mobile-search');
+
+  searchButton?.addEventListener('click', () => {
+    mobileSearch?.classList.toggle('hidden');
+  });
+
+  // Desktop search functionality (FIXED)
+  const desktopSearch = document.getElementById('desktop-search');
+
+  if (desktopSearch instanceof HTMLInputElement) {
+    desktopSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const query = desktopSearch.value.trim();
+        if (query) {
+          window.location.href = `/search?q=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  }
+</script>

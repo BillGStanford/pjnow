@@ -1,0 +1,146 @@
+---
+// short-singularity/src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/article/ArticleCard.astro';
+import MetaTags from '../components/seo/MetaTags.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import articles from '../data/articles.json';
+import authors from '../data/authors.json';
+import type { Article, Author } from '../types';
+
+const allArticles = articles as Article[];
+const allAuthors = authors as Author[];
+
+// Get lead article
+const leadArticle = allArticles.find(a => a.lead && a.status === 'published');
+
+// Get featured articles (excluding lead)
+const featuredArticles = allArticles
+  .filter(a => a.featured && !a.lead && a.status === 'published')
+  .slice(0, 3);
+
+// Get recent articles (excluding lead and featured)
+const recentArticles = allArticles
+  .filter(a => a.status === 'published' && !a.lead && !a.featured)
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+  .slice(0, 6);
+
+function getAuthor(authorId: string): Author {
+  return allAuthors.find(a => a.id === authorId) || allAuthors[0];
+}
+---
+
+<BaseLayout 
+  title="The People's Tribune | Marxist-Leninist Analysis & Anti-Imperialist News"
+  description="A Marxist-Leninist newspaper committed to working-class journalism, anti-imperialist analysis, and the struggle for socialism."
+>
+  <Fragment slot="head">
+    <MetaTags 
+      title="The People's Tribune | Marxist-Leninist Analysis & Anti-Imperialist News"
+      description="A Marxist-Leninist newspaper committed to working-class journalism, anti-imperialist analysis, and the struggle for socialism."
+      image="/images/logo.svg"
+      type="website"
+      url="/"
+    />
+    <StructuredData type="home" />
+  </Fragment>
+
+  <div class="container-custom py-8">
+    <!-- Breaking News Banner -->
+    <div class="bg-primary text-white py-2 px-4 mb-6">
+      <div class="flex items-center">
+        <span class="font-bold mr-2">BREAKING:</span>
+        <span class="text-sm">Workers strike at major factory demanding better wages and conditions</span>
+      </div>
+    </div>
+
+    <!-- Lead Article -->
+    {leadArticle && (
+      <section class="mb-12">
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div>
+            {leadArticle.featuredImage && (
+              <img 
+                src={leadArticle.featuredImage.src}
+                alt={leadArticle.featuredImage.alt}
+                class="w-full aspect-[16/9] object-cover"
+              />
+            )}
+          </div>
+          <div class="flex flex-col justify-center">
+            <div class="text-xs uppercase tracking-wide text-primary font-semibold mb-2">
+              Lead Story
+            </div>
+            <a href={`/articles/${leadArticle.slug}`} class="group">
+              <h2 class="article-title mb-3 group-hover:text-primary transition-colors">
+                {leadArticle.title}
+              </h2>
+              {leadArticle.subtitle && (
+                <p class="article-subtitle mb-4">
+                  {leadArticle.subtitle}
+                </p>
+              )}
+              <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                {leadArticle.excerpt}
+              </p>
+              <div class="flex items-center gap-3">
+                <img 
+                  src={getAuthor(leadArticle.authorId).avatar}
+                  alt={getAuthor(leadArticle.authorId).name}
+                  class="w-12 h-12 rounded-full object-cover"
+                />
+                <div>
+                  <div class="font-medium">
+                    {getAuthor(leadArticle.authorId).name}
+                  </div>
+                  <div class="text-sm text-gray-600">
+                    {getAuthor(leadArticle.authorId).role}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Featured Articles -->
+    {featuredArticles.length > 0 && (
+      <section class="mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="section-title">Featured Analysis</h2>
+          <a href="/sections/analysis" class="text-primary hover:underline text-sm font-medium">View All</a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          {featuredArticles.map(article => (
+            <ArticleCard 
+              article={article}
+              author={getAuthor(article.authorId)}
+              featured={true}
+              size="medium"
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Recent Articles Grid -->
+    {recentArticles.length > 0 && (
+      <section class="mb-12">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="section-title">Recent Articles</h2>
+          <a href="/articles" class="text-primary hover:underline text-sm font-medium">View All</a>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {recentArticles.map(article => (
+            <ArticleCard 
+              article={article}
+              author={getAuthor(article.authorId)}
+              size="small"
+            />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

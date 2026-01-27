@@ -1,0 +1,104 @@
+/* short-singularity/src/styles/global.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-white text-black font-sans antialiased;
+  }
+
+  /* Print styles for articles */
+  @media print {
+    body {
+      @apply text-black bg-white;
+    }
+    
+    header, nav, footer, .no-print {
+      @apply hidden;
+    }
+    
+    article {
+      @apply max-w-none;
+    }
+    
+    img {
+      @apply max-w-full;
+      page-break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+      page-break-after: avoid;
+    }
+    
+    p, blockquote {
+      orphans: 3;
+      widows: 3;
+    }
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .article-content h2 {
+    @apply text-3xl font-serif font-bold mt-8 mb-4 text-black;
+  }
+
+  .article-content h3 {
+    @apply text-2xl font-serif font-semibold mt-6 mb-3 text-black;
+  }
+
+  .article-content h4 {
+    @apply text-xl font-serif font-semibold mt-4 mb-2 text-black;
+  }
+
+  .article-content p {
+    @apply mb-6 text-lg leading-relaxed max-w-[65ch] text-black;
+  }
+
+  .article-content blockquote {
+    @apply border-l-4 border-red-600 pl-6 py-4 my-8 italic text-xl font-serif text-gray-700;
+  }
+
+  .article-content img {
+    @apply w-full h-auto my-8;
+  }
+
+  .article-content ul, .article-content ol {
+    @apply mb-6 ml-8 space-y-2 text-lg max-w-[65ch];
+  }
+
+  .article-content ul {
+    @apply list-disc;
+  }
+
+  .article-content ol {
+    @apply list-decimal;
+  }
+
+  .masthead-title {
+    @apply font-serif font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-none;
+  }
+
+  .section-title {
+    @apply font-serif font-bold text-3xl sm:text-4xl tracking-tight;
+  }
+
+  .article-title {
+    @apply font-serif font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight;
+  }
+
+  .article-subtitle {
+    @apply font-serif text-2xl sm:text-3xl text-gray-700 mt-2;
+  }
+}

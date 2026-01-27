@@ -1,0 +1,62 @@
+[
+  {
+    "id": "world",
+    "name": "World Affairs",
+    "description": "Anti-imperialist analysis of global events, national liberation movements, and international working-class struggles.",
+    "slug": "world"
+  },
+  {
+    "id": "political-economy",
+    "name": "Political Economy",
+    "description": "Marxist analysis of economic systems, capitalist crisis, and the relationship between base and superstructure.",
+    "slug": "political-economy"
+  },
+  {
+    "id": "theory",
+    "name": "Theory & Education",
+    "description": "Marxist-Leninist theoretical work, political education, and historical materialism.",
+    "slug": "theory"
+  },
+  {
+    "id": "labor",
+    "name": "Labor & Organizing",
+    "description": "Workers' struggles, union organizing, and the fight for workplace democracy.",
+    "slug": "labor"
+  },
+  {
+    "id": "analysis",
+    "name": "Analysis",
+    "description": "In-depth analysis of current events, strategic questions, and conjunctural political developments.",
+    "slug": "analysis"
+  },
+  {
+    "id": "history",
+    "name": "History",
+    "description": "Historical analysis of revolutionary movements, class struggle, colonialism, and socialist experiments.",
+    "slug": "history"
+  },
+  {
+    "id": "imperialism",
+    "name": "Imperialism & Militarism",
+    "description": "Critical analysis of imperialist war, NATO, sanctions, occupation, and global power structures.",
+    "slug": "imperialism"
+  },
+  {
+    "id": "technology",
+    "name": "Technology & Capitalism",
+    "description": "Analysis of technology, automation, surveillance, and digital labor under capitalism.",
+    "slug": "technology"
+  },
+  {
+    "id": "oppression",
+    "name": "Oppression & Liberation",
+    "description": "Class analysis of race, gender, sexuality, and national oppression within capitalist society.",
+    "slug": "oppression"
+  },
+  {
+    "id": "movement-news",
+    "name": "Movement News",
+    "description": "Updates and reporting from socialist movements, campaigns, and struggles on the ground.",
+    "slug": "movement-news"
+  }
+]

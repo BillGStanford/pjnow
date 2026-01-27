@@ -1,0 +1,23 @@
+[
+  {
+    "id": "j-doe",
+    "name": "J. Doe",
+    "role": "International Correspondent",
+    "bio": "Specializes in African political economy and anti-imperialist movements. Based in Nairobi.",
+    "avatar": "/images/authors/t-logo.jpg"
+  },
+  {
+    "id": "m-garcia",
+    "name": "M. Garcia",
+    "role": "Latin America Editor",
+    "bio": "Covers Latin American socialism and U.S. imperialism. Former organizer with solidarity movements.",
+    "avatar": "/images/authors/t-logo.jpg"
+  },
+  {
+    "id": "editor-in-chief",
+    "name": "Editorial Board",
+    "role": "Editor-in-Chief",
+    "bio": "Collective editorial leadership committed to Marxist-Leninist analysis and working-class journalism.",
+    "avatar": "/images/authors/t-logo.jpg"
+  }
+]

@@ -1,0 +1,217 @@
+---
+// short-singularity/src/pages/editorial-policy.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MetaTags from '../components/seo/MetaTags.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import { FileText, Shield, AlertCircle, CheckCircle } from 'lucide-react';
+---
+
+<BaseLayout 
+  title="Editorial Policy | The People's Tribune"
+  description="The People's Tribune editorial policy - Our commitment to journalistic integrity, Marxist-Leninist analysis, and serving the working class movement."
+>
+  <Fragment slot="head">
+    <MetaTags 
+      title="Editorial Policy | The People's Tribune"
+      description="The People's Tribune editorial policy - Our commitment to journalistic integrity, Marxist-Leninist analysis, and serving the working class movement."
+      type="website"
+      url="/editorial-policy"
+    />
+    <StructuredData type="section" />
+  </Fragment>
+
+  <div class="container-custom py-12">
+    <!-- Hero Section -->
+    <section class="mb-16">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
+          Editorial Policy
+        </h1>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Our commitment to journalistic integrity, Marxist-Leninist analysis, 
+          and serving the working class movement.
+        </p>
+      </div>
+    </section>
+
+    <!-- Core Principles -->
+    <section class="mb-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-serif font-bold mb-8 flex items-center gap-3">
+          <FileText className="w-8 h-8 text-primary" />
+          Core Editorial Principles
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-serif font-bold text-xl mb-3 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              Class Analysis
+            </h3>
+            <p class="text-gray-700">
+              All content is analyzed through a class-conscious lens, examining how events and 
+              policies affect different social classes and serve the interests of capital versus labor.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-serif font-bold text-xl mb-3 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              Anti-Imperialism
+            </h3>
+            <p class="text-gray-700">
+              We consistently oppose imperialist wars, sanctions, and interventions, standing in 
+              solidarity with oppressed nations and their right to self-determination.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-serif font-bold text-xl mb-3 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              Scientific Socialism
+            </h3>
+            <p class="text-gray-700">
+              Our analysis is grounded in Marxist-Leninist theory and methodology, providing readers 
+              with tools to understand the material conditions shaping society.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="font-serif font-bold text-xl mb-3 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-green-600" />
+              Movement Building
+            </h3>
+            <p class="text-gray-700">
+              We aim to contribute to building the revolutionary movement through education, 
+              analysis, and support for concrete organizing efforts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Standards -->
+    <section class="mb-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-serif font-bold mb-8 flex items-center gap-3">
+          <Shield className="w-8 h-8 text-primary" />
+          Content Standards
+        </h2>
+        
+        <div class="bg-white border-2 border-gray-200 p-8 rounded-lg">
+          <h3 class="font-serif font-bold text-xl mb-4">What We Publish</h3>
+          <ul class="space-y-3 mb-6">
+            <li class="flex items-start gap-3">
+              <span class="text-primary font-bold">•</span>
+              <span class="text-gray-700">Original analysis of current events from a Marxist-Leninist perspective</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary font-bold">•</span>
+              <span class="text-gray-700">Reports on workers' struggles and social movements worldwide</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary font-bold">•</span>
+              <span class="text-gray-700">Historical analysis relevant to contemporary struggles</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary font-bold">•</span>
+              <span class="text-gray-700">Theoretical articles advancing socialist understanding</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-primary font-bold">•</span>
+              <span class="text-gray-700">Reviews of books, films, and cultural works from a class perspective</span>
+            </li>
+          </ul>
+          
+          <h3 class="font-serif font-bold text-xl mb-4">What We Don't Publish</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-red-600 font-bold">•</span>
+              <span class="text-gray-700">Content that supports imperialist interventions or wars</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-red-600 font-bold">•</span>
+              <span class="text-gray-700">Articles promoting reformism over revolutionary change</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-red-600 font-bold">•</span>
+              <span class="text-gray-700">Content that attacks or undermines socialist movements</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-red-600 font-bold">•</span>
+              <span class="text-gray-700">Unsourced claims or conspiracy theories</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submission Guidelines -->
+    <section class="mb-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-serif font-bold mb-8">Submission Guidelines</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="font-serif font-bold text-xl mb-4">Article Requirements</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• 800-2,000 words for standard articles</li>
+              <li>• Proper sourcing for all claims</li>
+              <li>• Clear, accessible writing style</li>
+              <li>• Original content not published elsewhere</li>
+              <li>• Alignment with our editorial principles</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="font-serif font-bold text-xl mb-4">Review Process</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• All submissions reviewed by editorial board</li>
+              <li>• Response within 2-3 weeks</li>
+              <li>• Edits may be suggested for clarity</li>
+              <li>• Final approval required before publication</li>
+              <li>• Contributors retain rights to their work</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corrections Policy -->
+    <section class="mb-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-serif font-bold mb-8 flex items-center gap-3">
+          <AlertCircle className="w-8 h-8 text-primary" />
+          Corrections & Clarifications
+        </h2>
+        
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded">
+          <p class="text-gray-700 mb-4">
+            The People's Tribune is committed to accuracy and transparency. When errors occur, 
+            we promptly correct them and note the correction at the bottom of the article.
+          </p>
+          <p class="text-gray-700">
+            To report an error or request a correction, please email us at 
+            <a href="mailto:nilecomun@gmail.com" class="text-primary font-medium hover:underline">
+              nilecomun@gmail.com
+            </a>
+            with "Correction Request" in the subject line.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Independence Statement -->
+    <section class="bg-primary text-white p-8 rounded-lg">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-serif font-bold mb-4">Editorial Independence</h2>
+        <p class="text-lg leading-relaxed">
+          The People's Tribune maintains complete editorial independence from any  
+          organization. Our content is guided solely by our commitment to 
+          Marxist-Leninist principles and the interests of the working class. We accept no 
+          corporate advertising and rely solely on reader donations to fund our operations.
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

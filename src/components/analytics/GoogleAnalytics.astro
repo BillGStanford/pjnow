@@ -1,0 +1,13 @@
+---
+// src/components/analytics/GoogleAnalytics.astro
+---
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6D3BQKJKEV"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(...args) { window.dataLayer.push(args); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-6D3BQKJKEV');
+</script>
