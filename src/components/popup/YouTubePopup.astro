@@ -1,0 +1,240 @@
+---
+// src/components/popup/YouTubePopup.astro
+---
+
+<!-- Regular YouTube popup for home page and other pages -->
+<div id="youtube-popup" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+  <div class="bg-white rounded-lg shadow-2xl max-w-md mx-4 transform transition-all duration-300 scale-95 opacity-0" id="popup-content">
+    <div class="p-6">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-900">Follow The People's Tribune</h3>
+        <button id="close-popup" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <p class="text-gray-600 mb-6">Stay updated with our latest Marxist-Leninist analysis and anti-imperialist news by subscribing to our YouTube channel.</p>
+      
+      <a 
+        href="https://www.youtube.com/@ThePeoplesTribune"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-md transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.118C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.393.568A2.99 2.99 0 0 0 .502 6.186 31.02 31.02 0 0 0 0 12a31.02 31.02 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.105 2.118C4.495 20.5 12 20.5 12 20.5s7.505 0 9.393-.568a2.99 2.99 0 0 0 2.105-2.118A31.02 31.02 0 0 0 24 12a31.02 31.02 0 0 0-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
+        </svg>
+        Subscribe on YouTube
+      </a>
+      
+      <div class="mt-4 text-center text-sm text-gray-500">
+        Join our community of revolutionary readers
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Article-specific YouTube popup with blur and slide-up animation (bigger size) -->
+<div id="article-youtube-popup" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-md">
+  <div class="bg-white rounded-t-3xl shadow-2xl max-w-2xl mx-auto w-full transform transition-all duration-500 translate-y-full opacity-0" id="article-youtube-popup-content">
+    <div class="p-8 md:p-10">
+      <div class="flex justify-between items-start mb-6">
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900">We Now Have A YouTube Channel</h3>
+        <button id="close-article-youtube-popup" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="flex justify-center mb-6">
+        <div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" class="text-red-600">
+            <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.118C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.393.568A2.99 2.99 0 0 0 .502 6.186 31.02 31.02 0 0 0 0 12a31.02 31.02 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.105 2.118C4.495 20.5 12 20.5 12 20.5s7.505 0 9.393-.568a2.99 2.99 0 0 0 2.105-2.118A31.02 31.02 0 0 0 24 12a31.02 31.02 0 0 0-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
+          </svg>
+        </div>
+      </div>
+      
+      <p class="text-lg text-gray-600 text-center mb-8">Get the latest Marxist-Leninist analysis and anti-imperialist news delivered directly to you. Join thousands of revolutionaries staying informed with our content.</p>
+      
+      <a 
+        href="https://www.youtube.com/@ThePeoplesTribune"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-3 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition-colors mb-6 text-lg"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.118C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.393.568A2.99 2.99 0 0 0 .502 6.186 31.02 31.02 0 0 0 0 12a31.02 31.02 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.105 2.118C4.495 20.5 12 20.5 12 20.5s7.505 0 9.393-.568a2.99 2.99 0 0 0 2.105-2.118A31.02 31.02 0 0 0 24 12a31.02 31.02 0 0 0-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
+        </svg>
+        Subscribe Now on YouTube
+      </a>
+      
+      <div class="text-center text-base text-gray-500">
+        Join our community of revolutionary readers
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // YouTube popup functionality
+  const youtubePopup = document.getElementById('youtube-popup');
+  const popupContent = document.getElementById('popup-content');
+  const closePopup = document.getElementById('close-popup');
+  
+  // Article YouTube popup functionality
+  const articleYoutubePopup = document.getElementById('article-youtube-popup');
+  const articleYoutubePopupContent = document.getElementById('article-youtube-popup-content');
+  const closeArticlePopupButton = document.getElementById('close-article-youtube-popup');
+  
+  // Check if we're on an article page
+  const isArticlePage = window.location.pathname.includes('/articles/');
+  
+  // Track if user has interacted with the page
+  let hasUserInteracted = false;
+  
+  // Initialize local storage data
+  const initLocalStorage = () => {
+    if (!localStorage.getItem('youtubePopupData')) {
+      localStorage.setItem('youtubePopupData', JSON.stringify({
+        lastShown: null,
+        count: 0
+      }));
+    }
+  };
+  
+  // Get popup data from local storage
+  const getPopupData = () => {
+    return JSON.parse(localStorage.getItem('youtubePopupData') || '{}');
+  };
+  
+  // Update popup data in local storage
+  const updatePopupData = (data: { lastShown: string | null; count: number; }) => {
+    localStorage.setItem('youtubePopupData', JSON.stringify(data));
+  };
+  
+  // Show the YouTube popup (only after user interaction)
+  const showYoutubePopup = () => {
+    if (!hasUserInteracted) return;
+    
+    const popupData = getPopupData();
+    const now = new Date().getTime();
+    
+    // Check if we should show the popup
+    if (popupData.count >= 5) return;
+    
+    if (popupData.lastShown) {
+      const timeDiff = now - new Date(popupData.lastShown).getTime();
+      // 20 minutes in milliseconds
+      const twentyMinutes = 20 * 60 * 1000;
+      
+      if (timeDiff < twentyMinutes) return;
+    }
+    
+    // Show the popup
+    if (youtubePopup) {
+      youtubePopup.classList.remove('hidden');
+      youtubePopup.classList.add('flex');
+      
+      // Animate in
+      setTimeout(() => {
+        if (popupContent) {
+          popupContent.classList.remove('scale-95', 'opacity-0');
+          popupContent.classList.add('scale-100', 'opacity-100');
+        }
+      }, 10);
+      
+      // Update local storage
+      updatePopupData({
+        ...popupData,
+        lastShown: new Date().toISOString(),
+        count: popupData.count + 1
+      });
+    }
+  };
+  
+  // Close the YouTube popup
+  const closeYoutubePopup = () => {
+    if (youtubePopup && popupContent) {
+      popupContent.classList.remove('scale-100', 'opacity-100');
+      popupContent.classList.add('scale-95', 'opacity-0');
+      
+      setTimeout(() => {
+        youtubePopup.classList.add('hidden');
+        youtubePopup.classList.remove('flex');
+      }, 300);
+    }
+  };
+  
+  // Show the article YouTube popup (always shows on article pages, with slide-up animation)
+  const showArticleYoutubePopup = () => {
+    // Always show on article pages regardless of previous visits
+    if (articleYoutubePopup) {
+      articleYoutubePopup.classList.remove('hidden');
+      articleYoutubePopup.classList.add('flex');
+      
+      // Animate in with slide-up effect
+      setTimeout(() => {
+        if (articleYoutubePopupContent) {
+          articleYoutubePopupContent.classList.remove('translate-y-full', 'opacity-0');
+          articleYoutubePopupContent.classList.add('translate-y-0', 'opacity-100');
+        }
+      }, 10);
+    }
+  };
+  
+  // Close the article YouTube popup
+  const closeArticleYoutubePopup = () => {
+    if (articleYoutubePopup && articleYoutubePopupContent) {
+      articleYoutubePopupContent.classList.remove('translate-y-0', 'opacity-100');
+      articleYoutubePopupContent.classList.add('translate-y-full', 'opacity-0');
+      
+      setTimeout(() => {
+        articleYoutubePopup.classList.add('hidden');
+        articleYoutubePopup.classList.remove('flex');
+      }, 500);
+    }
+  };
+  
+  // Initialize event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    initLocalStorage();
+    
+    // Set up close buttons
+    if (closePopup) {
+      closePopup.addEventListener('click', closeYoutubePopup);
+    }
+    
+    if (closeArticlePopupButton) {
+      closeArticlePopupButton.addEventListener('click', closeArticleYoutubePopup);
+    }
+    
+    // Track user interaction (scroll, click, or keypress)
+    const trackUserInteraction = () => {
+      if (!hasUserInteracted) {
+        hasUserInteracted = true;
+        // Show YouTube popup after 2 seconds of first interaction
+        setTimeout(showYoutubePopup, 2000);
+      }
+    };
+    
+    // Add event listeners for user interaction
+    window.addEventListener('scroll', trackUserInteraction, { once: true });
+    window.addEventListener('click', trackUserInteraction, { once: true });
+    window.addEventListener('keydown', trackUserInteraction, { once: true });
+    
+    // Set interval to check if we should show the popup again (every 5 minutes)
+    setInterval(() => {
+      showYoutubePopup();
+    }, 5 * 60 * 1000);
+    
+    // If on article page, always show the YouTube popup after 5 seconds
+    if (isArticlePage) {
+      setTimeout(showArticleYoutubePopup, 5000);
+    }
+  });
+</script>

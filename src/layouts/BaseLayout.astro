@@ -3,6 +3,7 @@
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import GoogleAnalytics from '../components/analytics/GoogleAnalytics.astro';
+import YouTubePopup from '../components/popup/YouTubePopup.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -37,5 +38,8 @@ const { title, description } = Astro.props;
     </main>
     
     <Footer />
+    
+    <!-- YouTube Popup Component -->
+    <YouTubePopup />
   </body>
 </html>
