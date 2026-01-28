@@ -1,9 +1,9 @@
 ---
-// short-singularity/src/pages/about.astro
+// src/pages/about.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MetaTags from '../components/seo/MetaTags.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
-import { Users, Target, BookOpen, Globe } from 'lucide-react';
+import { Users, Target, BookOpen, Globe, ArrowRight } from 'lucide-react';
 ---
 
 <BaseLayout 
@@ -18,183 +18,123 @@ import { Users, Target, BookOpen, Globe } from 'lucide-react';
       url="/about"
     />
     <StructuredData type="section" />
-
   </Fragment>
 
-  <div class="container-custom py-12">
-    <!-- Hero Section -->
-    <section class="mb-16">
-      <div class="text-center max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
-          About The People's Tribune
+  <div class="bg-black text-white py-20 border-b-8 border-primary">
+    <div class="container-custom">
+      <div class="max-w-5xl">
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-8 italic">
+          Voice of the <span class="text-primary">Proletariat</span>
         </h1>
-        <p class="text-xl text-gray-700 leading-relaxed">
-          A Marxist-Leninist newspaper committed to working-class journalism, 
-          anti-imperialist analysis, and the struggle for socialism.
+        <p class="text-2xl md:text-3xl font-bold max-w-3xl leading-tight border-l-8 border-primary pl-6">
+          The People's Tribune is a Marxist-Leninist newspaper committed to working-class journalism and the global struggle for socialism[cite: 5].
         </p>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Mission Statement -->
-    <section class="mb-16">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-gray-50 p-8 rounded-lg">
-          <h2 class="text-3xl font-serif font-bold mb-6 flex items-center gap-3">
-            <Target className="w-8 h-8 text-primary" />
-            Our Mission
-          </h2>
-          <div class="prose prose-lg max-w-none">
-            <p class="text-gray-700 leading-relaxed mb-4">
-              The People's Tribune stands as a voice for the working class, dedicated to exposing 
-              the contradictions of capitalism and advancing the cause of revolutionary socialism. 
-              We provide uncompromising analysis of current events through a Marxist-Leninist lens, 
-              connecting local struggles to global movements for liberation.
-            </p>
-            <p class="text-gray-700 leading-relaxed">
-              In an era of corporate media consolidation and bourgeois propaganda, we serve as an 
-              independent platform for workers, students, and activists to access honest journalism 
-              that challenges imperialist narratives and supports movements for social change.
-            </p>
+  <div class="container-custom py-16">
+    <section class="grid lg:grid-cols-12 gap-12 mb-24 items-start">
+      <div class="lg:col-span-5 bg-primary text-white p-10 transform -rotate-1 shadow-2xl">
+        <h2 class="text-4xl font-black uppercase mb-6 flex items-center gap-3">
+          <Target className="w-10 h-10" />
+          Our Mission
+        </h2>
+        <div class="prose prose-invert prose-lg">
+          <p class="font-bold text-xl leading-snug mb-6">
+            We stand as a voice for the working class, dedicated to exposing the contradictions of capitalism[cite: 8].
+          </p>
+          <p>
+            In an era of corporate media consolidation and bourgeois propaganda, we serve as an independent platform to challenge imperialist narratives[cite: 10].
+          </p>
+        </div>
+      </div>
+      
+      <div class="lg:col-span-7 pt-8">
+        <h2 class="text-5xl font-black uppercase mb-12 tracking-tight">Core Principles</h2>
+        <div class="grid sm:grid-cols-2 gap-x-8 gap-y-12">
+          <div class="border-t-4 border-black pt-4">
+            <h3 class="font-black text-2xl uppercase mb-2 flex items-center gap-2">
+              <Users className="text-primary w-6 h-6" /> Worker-Led
+            </h3>
+            <p class="text-gray-700">Created by and for the working class, prioritizing experiences of capitalist exploitation[cite: 12, 13].</p>
+          </div>
+          
+          <div class="border-t-4 border-black pt-4">
+            <h3 class="font-black text-2xl uppercase mb-2 flex items-center gap-2">
+              <BookOpen className="text-primary w-6 h-6" /> Scientific Analysis
+            </h3>
+            <p class="text-gray-700">Applying Marxist-Leninist methodology to understand the material conditions shaping our world[cite: 14, 15].</p>
+          </div>
+          
+          <div class="border-t-4 border-black pt-4">
+            <h3 class="font-black text-2xl uppercase mb-2 flex items-center gap-2">
+              <Globe className="text-primary w-6 h-6" /> Internationalism
+            </h3>
+            <p class="text-gray-700">Standing in solidarity with oppressed peoples and anti-imperialist struggles worldwide[cite: 16, 17].</p>
+          </div>
+          
+          <div class="border-t-4 border-black pt-4">
+            <h3 class="font-black text-2xl uppercase mb-2 flex items-center gap-2">
+              <Target className="text-primary w-6 h-6" /> Revolutionary
+            </h3>
+            <p class="text-gray-700">We work to change the world, supporting concrete actions for socialist transformation[cite: 18, 19].</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Our Values -->
-    <section class="mb-16">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-serif font-bold mb-10 text-center">Our Core Values</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="w-8 h-8" />
-            </div>
-            <h3 class="font-serif font-bold text-xl mb-3">Worker-Led</h3>
-            <p class="text-gray-700">
-              Our content is created by and for the working class, prioritizing the voices 
-              and experiences of those most affected by capitalist exploitation.
-            </p>
+    <section class="mb-24 bg-gray-100 p-12 border-4 border-dashed border-gray-400">
+      <h2 class="text-5xl font-black uppercase mb-10 text-center tracking-tighter">The Struggle So Far</h2>
+      <div class="space-y-12 max-w-4xl mx-auto">
+        <div class="flex gap-6 items-start">
+          <span class="text-6xl font-black text-primary opacity-30">2020</span>
+          <div>
+            <h3 class="text-2xl font-black uppercase mb-2">Founded in Resistance</h3>
+            <p class="text-gray-700 text-lg">Emerging from the need for independent socialist media to challenge mainstream narratives[cite: 20, 22].</p>
           </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-8 h-8" />
-            </div>
-            <h3 class="font-serif font-bold text-xl mb-3">Scientific Analysis</h3>
-            <p class="text-gray-700">
-              We apply Marxist-Leninist methodology to analyze current events, providing 
-              readers with tools to understand the material conditions shaping our world.
-            </p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-              <Globe className="w-8 h-8" />
-            </div>
-            <h3 class="font-serif font-bold text-xl mb-3">Internationalism</h3>
-            <p class="text-gray-700">
-              We stand in solidarity with oppressed peoples worldwide and support anti-imperialist 
-              struggles across the globe.
-            </p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
-              <Target className="w-8 h-8" />
-            </div>
-            <h3 class="font-serif font-bold text-xl mb-3">Revolutionary</h3>
-            <p class="text-gray-700">
-              We don't just analyze the world – we work to change it, supporting concrete 
-              actions and movements for socialist transformation.
-            </p>
+        </div>
+        
+        <div class="flex gap-6 items-start">
+          <span class="text-6xl font-black text-primary opacity-30">TODAY</span>
+          <div>
+            <h3 class="text-2xl font-black uppercase mb-2">A Growing Movement</h3>
+            <p class="text-gray-700 text-lg">Reaching thousands worldwide and contributing to vital political discussions[cite: 24].</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- History -->
-    <section class="mb-16">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-serif font-bold mb-8">Our History</h2>
-        <div class="space-y-6">
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-xl mb-2">Founded in 2020</h3>
-            <p class="text-gray-700">
-              The People's Tribune emerged from the growing need for independent socialist media 
-              in the digital age. Our founders, a collective of workers, students, and activists, 
-              recognized the importance of creating a platform that could challenge mainstream narratives.
-            </p>
-          </div>
-          
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-xl mb-2">Growing Movement</h3>
-            <p class="text-gray-700">
-              From humble beginnings as a small blog, we've grown into a respected voice in the 
-              socialist press, reaching thousands of readers worldwide and contributing to important 
-              political discussions.
-            </p>
-          </div>
-          
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-xl mb-2">Looking Forward</h3>
-            <p class="text-gray-700">
-              As capitalism's crises deepen, our mission becomes more urgent. We continue to expand 
-              our reach, develop new forms of media, and strengthen our connections with movements 
-              for social change.
-            </p>
-          </div>
+    <section class="mb-24">
+      <h2 class="text-5xl font-black uppercase mb-12 text-center underline decoration-primary decoration-8 underline-offset-8">The Collective</h2>
+      <div class="grid md:grid-cols-3 gap-0 border-4 border-black">
+        <div class="p-8 border-b-4 md:border-b-0 md:border-r-4 border-black hover:bg-primary hover:text-white transition-colors group">
+          <h3 class="font-black text-2xl uppercase mb-4">Editorial Board</h3>
+          <p class="group-hover:text-white text-gray-700">Experienced activists and scholars committed to Marxist-Leninist principles[cite: 28].</p>
+        </div>
+        
+        <div class="p-8 border-b-4 md:border-b-0 md:border-r-4 border-black hover:bg-primary hover:text-white transition-colors group">
+          <h3 class="font-black text-2xl uppercase mb-4">Contributing Writers</h3>
+          <p class="group-hover:text-white text-gray-700">Workers, organizers, and intellectuals from around the world[cite: 29, 30].</p>
+        </div>
+        
+        <div class="p-8 hover:bg-primary hover:text-white transition-colors group">
+          <h3 class="font-black text-2xl uppercase mb-4">Volunteer Staff</h3>
+          <p class="group-hover:text-white text-gray-700">Dedicated volunteers supporting independent socialist media[cite: 31, 32].</p>
         </div>
       </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="mb-16">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-serif font-bold mb-10 text-center">Our Editorial Collective</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 class="font-serif font-bold text-lg mb-2">Editorial Board</h3>
-            <p class="text-gray-600 text-sm">
-              Our editorial board consists of experienced activists, journalists, and scholars 
-              committed to Marxist-Leninist principles.
-            </p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 class="font-serif font-bold text-lg mb-2">Contributing Writers</h3>
-            <p class="text-gray-600 text-sm">
-              We feature contributions from workers, organizers, and intellectuals from around 
-              the world who share our commitment to revolutionary change.
-            </p>
-          </div>
-          
-          <div class="text-center">
-            <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
-            <h3 class="font-serif font-bold text-lg mb-2">Volunteer Staff</h3>
-            <p class="text-gray-600 text-sm">
-              Our operations are supported by dedicated volunteers who believe in the importance 
-              of independent socialist media.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="bg-primary text-white p-8 rounded-lg text-center">
-      <h2 class="text-3xl font-serif font-bold mb-4">Join Our Movement</h2>
-      <p class="text-lg mb-6 max-w-2xl mx-auto">
-        The People's Tribune is more than a newspaper – it's a tool for building the revolutionary 
-        movement. Whether you're a writer, organizer, or concerned citizen, there's a place for you 
-        in our collective.
+    <section class="bg-black text-white p-12 text-center transform rotate-1">
+      <h2 class="text-5xl font-black uppercase mb-6 tracking-tighter">Join the Movement</h2>
+      <p class="text-xl mb-10 max-w-2xl mx-auto font-bold uppercase">
+        The People's Tribune is a tool for building the revolutionary movement[cite: 33].
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/submit" class="bg-white text-primary px-6 py-3 rounded-md font-bold hover:bg-gray-100 transition-colors">
-          Submit an Article
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a href="/submit" class="bg-primary text-white px-10 py-4 font-black uppercase text-xl hover:bg-white hover:text-black transition-all">
+          Submit Article
         </a>
-        <a href="/subscribe" class="border-2 border-white text-white px-6 py-3 rounded-md font-bold hover:bg-white hover:text-primary transition-colors">
+        <a href="/subscribe" class="border-4 border-white text-white px-10 py-4 font-black uppercase text-xl hover:bg-white hover:text-black transition-all">
           Subscribe
         </a>
       </div>

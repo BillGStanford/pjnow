@@ -1,13 +1,13 @@
 ---
-// short-singularity/src/pages/sections/[slug].astro
+// src/pages/sections/[slug].astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ArticleCard from '../../components/article/ArticleCard.astro';
 import MetaTags from '../../components/seo/MetaTags.astro';
 import StructuredData from '../../components/seo/StructuredData.astro';
 import articles from '../../data/articles.json';
 import authors from '../../data/authors.json';
 import sections from '../../data/sections.json';
 import type { Article, Author, Section } from '../../types';
+import { ArrowRight, ChevronRight, Globe } from 'lucide-react';
 
 export async function getStaticPaths() {
   const allSections = sections as Section[];
@@ -28,6 +28,13 @@ const sectionArticles = allArticles
 function getAuthor(authorId: string): Author {
   return allAuthors.find(a => a.id === authorId) || allAuthors[0];
 }
+
+// Helper to get image src safely across different data structures
+const getImgSrc = (article: Article) => {
+  if (article.featuredImage?.src) return article.featuredImage.src;
+  // @ts-ignore - fallback for different JSON structures
+  return article.image || '/placeholder.jpg';
+};
 ---
 
 <BaseLayout 
@@ -41,88 +48,122 @@ function getAuthor(authorId: string): Author {
       type="website"
       url={`/sections/${section.slug}`}
     />
-    <StructuredData type="section" section={section} />
+    <StructuredData type="section" />
   </Fragment>
 
-  <div class="container-custom py-8">
-    <!-- Section Header -->
-    <header class="mb-12 pb-8 border-b-2 border-primary">
-      <h1 class="section-title mb-3">
-        {section.name}
-      </h1>
-      <p class="text-lg text-gray-700 max-w-3xl">
-        {section.description}
-      </p>
-    </header>
+  <div class="bg-black text-white border-b-8 border-primary mb-12">
+    <div class="container-custom py-16 relative">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-2 text-primary font-black uppercase tracking-[0.3em] mb-4">
+            <Globe className="w-5 h-5" />
+            <span>Theater of Analysis</span>
+          </div>
+          <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 italic">
+            {section.name}
+          </h1>
+          <p class="text-xl md:text-2xl font-bold border-l-8 border-primary pl-6 text-gray-300">
+            {section.description}
+          </p>
+        </div>
+        <div class="hidden lg:block">
+           <div class="text-right">
+              <span class="block text-6xl font-black text-primary opacity-50 leading-none">{sectionArticles.length}</span>
+              <span class="block font-black uppercase tracking-widest text-sm">Dispatches Filed</span>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Featured Article -->
+  <div class="container-custom pb-24">
     {sectionArticles.length > 0 && (
-      <section class="mb-12">
-        <div class="grid lg:grid-cols-2 gap-8">
-          <div>
-            <a href={`/articles/${sectionArticles[0].slug}`} class="group">
-              {sectionArticles[0].featuredImage && (
-                <img 
-                  src={sectionArticles[0].featuredImage.src}
-                  alt={sectionArticles[0].featuredImage.alt}
-                  class="w-full aspect-[16/9] object-cover mb-4 group-hover:opacity-90 transition-opacity"
-                />
-              )}
-              <h2 class="text-3xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
-                {sectionArticles[0].title}
-              </h2>
-              {sectionArticles[0].subtitle && (
-                <p class="text-xl text-gray-700 mb-4">
-                  {sectionArticles[0].subtitle}
-                </p>
-              )}
-              <p class="text-gray-700 line-clamp-3">
-                {sectionArticles[0].excerpt}
-              </p>
+      <section class="mb-20">
+        <div class="grid lg:grid-cols-12 gap-0 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+          <div class="lg:col-span-8 bg-white p-8 md:p-12">
+            <span class="inline-block bg-primary text-white px-2 py-0.5 text-[10px] font-black uppercase mb-4">Primary Intelligence</span>
+            <h2 class="text-4xl md:text-5xl font-black uppercase mb-6 hover:text-primary transition-colors leading-none">
+              <a href={`/articles/${sectionArticles[0].slug}`}>{sectionArticles[0].title}</a>
+            </h2>
+            <p class="text-lg font-bold text-gray-700 mb-8 leading-relaxed italic">
+              "{sectionArticles[0].excerpt}"
+            </p>
+            <a href={`/articles/${sectionArticles[0].slug}`} class="flex items-center gap-4 group">
+              <div class="h-10 w-10 bg-black flex items-center justify-center text-white group-hover:bg-primary transition-colors">
+                <ArrowRight className="w-6 h-6" />
+              </div>
+              <span class="font-black uppercase tracking-widest text-sm">Read the Full Report</span>
             </a>
           </div>
-          
-          <div class="flex flex-col justify-center">
-            <h3 class="text-xl font-serif font-bold mb-4">Latest in {section.name}</h3>
-            <div class="space-y-4">
-              {sectionArticles.slice(1, 4).map(article => (
-                <div class="pb-4 border-b border-gray-200 last:border-0">
-                  <a href={`/articles/${article.slug}`} class="group">
-                    <h4 class="font-serif font-bold mb-1 group-hover:text-primary transition-colors">
-                      {article.title}
-                    </h4>
-                    <p class="text-sm text-gray-600 line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                  </a>
-                </div>
-              ))}
-            </div>
+          <div class="lg:col-span-4 bg-gray-200 border-t-4 lg:border-t-0 lg:border-l-4 border-black min-h-[300px] relative overflow-hidden">
+            <img 
+              src={getImgSrc(sectionArticles[0])} 
+              alt={sectionArticles[0].title} 
+              class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700 absolute inset-0"
+            />
           </div>
         </div>
       </section>
     )}
 
-    <!-- Articles Grid -->
-    {sectionArticles.length > 4 && (
-      <section>
-        <h2 class="section-title mb-6">All Articles</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sectionArticles.slice(4).map(article => (
-            <ArticleCard 
-              article={article}
-              author={getAuthor(article.authorId)}
-              size="medium"
-            />
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-4 mb-10 border-b-4 border-black pb-2">
+          <h2 class="text-3xl font-black uppercase tracking-tighter italic">Intelligence Feed</h2>
+          <div class="flex-1 h-1 bg-black"></div>
+        </div>
+        
+        <div class="space-y-12">
+          {sectionArticles.slice(1).map(article => (
+            <div class="group border-b-2 border-gray-200 pb-10 last:border-0">
+              <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3 aspect-video bg-gray-100 border-2 border-black overflow-hidden flex-shrink-0 relative">
+                  <img 
+                    src={getImgSrc(article)} 
+                    alt={article.title}
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 absolute inset-0"
+                  />
+                </div>
+                <div class="flex-1">
+                  <div class="text-xs font-black uppercase text-primary mb-2 flex items-center gap-1">
+                    <ChevronRight className="w-3 h-3" /> {new Date(article.publishedAt).toLocaleDateString()}
+                  </div>
+                  <h3 class="text-3xl font-black uppercase leading-[0.9] mb-4 group-hover:text-primary transition-colors italic">
+                    <a href={`/articles/${article.slug}`}>{article.title}</a>
+                  </h3>
+                  <p class="text-gray-600 font-bold text-sm mb-4 line-clamp-2 leading-relaxed">{article.excerpt}</p>
+                  <span class="text-[10px] font-black uppercase border border-black px-2 py-1 bg-white">
+                    Dispatch by {getAuthor(article.authorId).name}
+                  </span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      </section>
-    )}
-
-    {sectionArticles.length === 0 && (
-      <div class="text-center py-12">
-        <p class="text-gray-600">No articles in this section yet.</p>
       </div>
-    )}
+
+      <aside class="space-y-12 sticky top-40">
+        <div class="bg-primary text-white p-8 border-4 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]">
+          <h3 class="text-2xl font-black uppercase mb-4 underline decoration-black decoration-4 underline-offset-4">Contribute</h3>
+          <p class="font-bold mb-6 text-sm leading-snug">Have data or analysis regarding {section.name}? We are looking for field reports and theoretical contributions.</p>
+          <a href="/submit" class="flex items-center justify-center gap-2 bg-black text-white px-6 py-4 font-black uppercase text-sm hover:bg-white hover:text-black transition-all border-2 border-black">
+            Submit a Dispatch <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        <div class="p-8 border-4 border-dashed border-gray-400 bg-gray-50">
+           <h3 class="font-black uppercase text-lg mb-4 italic">Material Focus</h3>
+           <p class="text-sm text-gray-600 font-bold leading-relaxed">
+             This section applies Marxist-Leninist scientific analysis to the specific contradictions 
+             found within {section.name}. Our goal is to move past bourgeois commentary 
+             into revolutionary understanding.
+           </p>
+        </div>
+
+        <div class="bg-black text-white p-6 font-black uppercase text-[10px] tracking-widest text-center">
+          End of {section.name} Archives // Total {sectionArticles.length} Files
+        </div>
+      </aside>
+    </div>
   </div>
 </BaseLayout>

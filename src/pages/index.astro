@@ -1,5 +1,5 @@
 ---
-// short-singularity/src/pages/index.astro
+// src/pages/index.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/article/ArticleCard.astro';
 import MetaTags from '../components/seo/MetaTags.astro';
@@ -28,6 +28,13 @@ const recentArticles = allArticles
 function getAuthor(authorId: string): Author {
   return allAuthors.find(a => a.id === authorId) || allAuthors[0];
 }
+
+// Helper to get image src safely
+const getImgSrc = (article: Article) => {
+  if (article.featuredImage?.src) return article.featuredImage.src;
+  // @ts-ignore - fallback for different JSON structures
+  return article.image || '/placeholder.jpg';
+};
 ---
 
 <BaseLayout 
@@ -38,109 +45,157 @@ function getAuthor(authorId: string): Author {
     <MetaTags 
       title="The People's Tribune | Marxist-Leninist Analysis & Anti-Imperialist News"
       description="A Marxist-Leninist newspaper committed to working-class journalism, anti-imperialist analysis, and the struggle for socialism."
-      image="/images/logo.svg"
       type="website"
       url="/"
     />
     <StructuredData type="home" />
   </Fragment>
 
-  <div class="container-custom py-8">
-    <!-- Breaking News Banner -->
-    <div class="bg-primary text-white py-2 px-4 mb-6">
-      <div class="flex items-center">
-        <span class="font-bold mr-2">BREAKING:</span>
-        <span class="text-sm">Workers strike at major factory demanding better wages and conditions</span>
+  <section class="border-b-8 border-black mb-12">
+    <div class="bg-primary py-4 border-b-4 border-black">
+      <div class="container-custom">
+        <p class="text-white font-black uppercase tracking-[0.2em] text-center text-sm">
+          Workers of the World, Unite! • {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).toUpperCase()}
+        </p>
       </div>
     </div>
-
-    <!-- Lead Article -->
+    
     {leadArticle && (
-      <section class="mb-12">
-        <div class="grid lg:grid-cols-2 gap-8">
-          <div>
-            {leadArticle.featuredImage && (
-              <img 
-                src={leadArticle.featuredImage.src}
-                alt={leadArticle.featuredImage.alt}
-                class="w-full aspect-[16/9] object-cover"
-              />
-            )}
-          </div>
-          <div class="flex flex-col justify-center">
-            <div class="text-xs uppercase tracking-wide text-primary font-semibold mb-2">
-              Lead Story
-            </div>
+      <div class="container-custom py-12">
+        <div class="grid lg:grid-cols-12 gap-0 border-4 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+          <div class="lg:col-span-7 bg-white p-8 lg:p-12 border-b-4 lg:border-b-0 lg:border-r-4 border-black">
+            <span class="inline-block bg-black text-white px-3 py-1 font-black uppercase text-xs mb-4 tracking-widest">Lead Dispatch</span>
             <a href={`/articles/${leadArticle.slug}`} class="group">
-              <h2 class="article-title mb-3 group-hover:text-primary transition-colors">
+              <h2 class="text-5xl md:text-7xl font-black uppercase leading-none mb-6 group-hover:text-primary transition-colors">
                 {leadArticle.title}
               </h2>
-              {leadArticle.subtitle && (
-                <p class="article-subtitle mb-4">
-                  {leadArticle.subtitle}
-                </p>
-              )}
-              <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+              <p class="text-xl font-bold text-gray-700 mb-8 leading-tight">
                 {leadArticle.excerpt}
               </p>
-              <div class="flex items-center gap-3">
-                <img 
-                  src={getAuthor(leadArticle.authorId).avatar}
-                  alt={getAuthor(leadArticle.authorId).name}
-                  class="w-12 h-12 rounded-full object-cover"
-                />
-                <div>
-                  <div class="font-medium">
-                    {getAuthor(leadArticle.authorId).name}
-                  </div>
-                  <div class="text-sm text-gray-600">
-                    {getAuthor(leadArticle.authorId).role}
-                  </div>
-                </div>
-              </div>
             </a>
+            <div class="flex items-center gap-4 border-t-2 border-black pt-6">
+              <div class="font-black uppercase text-sm tracking-tighter text-black">
+                By <span class="text-primary">{getAuthor(leadArticle.authorId).name}</span>
+              </div>
+              <div class="h-1 w-1 bg-black rounded-full"></div>
+              <div class="font-bold text-xs uppercase text-gray-500">
+                {new Date(leadArticle.publishedAt).toLocaleDateString()}
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5 bg-gray-200 min-h-[400px] relative overflow-hidden group">
+            <img 
+              src={getImgSrc(leadArticle)} 
+              alt={leadArticle.title}
+              class="absolute inset-0 w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
+            />
+            <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
           </div>
         </div>
-      </section>
+      </div>
     )}
+  </section>
 
-    <!-- Featured Articles -->
-    {featuredArticles.length > 0 && (
-      <section class="mb-12">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="section-title">Featured Analysis</h2>
-          <a href="/sections/analysis" class="text-primary hover:underline text-sm font-medium">View All</a>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          {featuredArticles.map(article => (
-            <ArticleCard 
-              article={article}
-              author={getAuthor(article.authorId)}
-              featured={true}
-              size="medium"
-            />
-          ))}
-        </div>
-      </section>
-    )}
+  <div class="container-custom pb-20">
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      
+      <div class="lg:col-span-2 space-y-16">
+        <section>
+          <div class="flex items-end gap-4 mb-10 border-b-4 border-black pb-2">
+            <h2 class="text-4xl font-black uppercase tracking-tighter">Featured Analysis</h2>
+            <div class="flex-1 h-2 bg-primary mb-2"></div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-8">
+            {featuredArticles.map(article => (
+              <div class="border-b-2 border-gray-200 pb-8 last:border-0 sm:last:border-b-2">
+                <ArticleCard 
+                  article={article}
+                  author={getAuthor(article.authorId)}
+                  featured={true}
+                  size="medium"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
 
-    <!-- Recent Articles Grid -->
-    {recentArticles.length > 0 && (
-      <section class="mb-12">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="section-title">Recent Articles</h2>
-          <a href="/articles" class="text-primary hover:underline text-sm font-medium">View All</a>
+        <section>
+          <div class="flex items-end gap-4 mb-10 border-b-4 border-black pb-2">
+            <h2 class="text-4xl font-black uppercase tracking-tighter">Recent Dispatches</h2>
+            <div class="flex-1 h-2 bg-black mb-2"></div>
+          </div>
+          <div class="grid gap-12">
+            {recentArticles.map(article => (
+              <div class="flex flex-col md:flex-row gap-8 items-start group">
+                <div class="w-full md:w-48 h-32 bg-gray-200 flex-shrink-0 border-2 border-black overflow-hidden relative">
+                   <img 
+                    src={getImgSrc(article)} 
+                    alt={article.title}
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" 
+                   />
+                </div>
+                <div class="flex-1">
+                   <h3 class="text-2xl font-black uppercase mb-2 group-hover:text-primary transition-colors leading-tight">
+                     <a href={`/articles/${article.slug}`}>{article.title}</a>
+                   </h3>
+                   <p class="text-gray-600 line-clamp-2 font-bold text-sm mb-4 leading-relaxed">{article.excerpt}</p>
+                   <div class="text-[10px] uppercase font-black tracking-widest text-primary flex items-center gap-2">
+                      <span class="bg-primary text-white px-1">CONTRIBUTOR</span>
+                      Filed by {getAuthor(article.authorId).name}
+                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <aside class="lg:col-span-1 space-y-12">
+        <div class="bg-black text-white p-8 transform rotate-1 border-t-8 border-primary shadow-[8px_8px_0px_0px_rgba(204,0,0,1)]">
+          <h3 class="text-3xl font-black uppercase mb-4 italic leading-none">Agitate. Educate. Organize.</h3>
+          <p class="font-bold mb-6 text-sm leading-snug">Join the struggle for a world free of exploitation. Our press is a weapon in the hands of the workers.</p>
+          <a href="/submit" class="block text-center border-2 border-white py-3 font-black uppercase hover:bg-white hover:text-black transition-all">
+            Join the Collective
+          </a>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {recentArticles.map(article => (
-            <ArticleCard 
-              article={article}
-              author={getAuthor(article.authorId)}
-              size="small"
-            />
-          ))}
+
+        <div class="border-4 border-black p-6 bg-white">
+          <h3 class="text-xl font-black uppercase mb-6 border-b-2 border-black pb-2">Top Sections</h3>
+          <ul class="space-y-4">
+            {['Anti-Imperialism', 'Labor Struggles', 'Theoretical Analysis', 'Global Reports'].map(section => (
+              <li>
+                <a href={`/sections/${section.toLowerCase().replace(' ', '-')}`} class="flex justify-between items-center group">
+                  <span class="font-black uppercase group-hover:text-primary transition-colors">{section}</span>
+                  <span class="h-4 w-4 bg-primary group-hover:translate-x-1 transition-transform"></span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </section>
-    )}
+
+        <div class="sticky top-40">
+           <div class="bg-primary text-white p-6 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <h3 class="font-black uppercase text-xl mb-2">Support the Press</h3>
+              <p class="text-xs font-bold uppercase mb-4">We accept no corporate funding. We are powered by the people.</p>
+              <button class="w-full bg-black text-white py-3 font-black uppercase text-sm hover:bg-white hover:text-black transition-colors border-2 border-black">
+                Donate to the Cause
+              </button>
+           </div>
+           <div class="mt-8 p-4 border-2 border-dashed border-black text-[10px] font-bold uppercase italic text-gray-400">
+             End of column // Broadcast remains active 24/7
+           </div>
+        </div>
+      </aside>
+
+    </div>
   </div>
 </BaseLayout>
+
+<style>
+  /* Ensure the marquee in the header (if present) doesn't break layout */
+  .container-custom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+</style>

@@ -7,34 +7,35 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#c00010c7',
-          dark: '#990000',
-          light: '#F77F00',
+          DEFAULT: '#b91c1c',
+          dark: '#991b1b',
+          light: '#dc2626',
         },
         secondary: {
-          DEFAULT: '#000000',
-          light: '#333333',
+          DEFAULT: '#111827',
+          light: '#374151',
         },
         accent: {
-          gold: '#FCA311',
-          bronze: '#EAE2B7',
+          gold: '#d97706',
+          bronze: '#92400e',
         },
         gray: {
-          100: '#F8F9FA',
-          200: '#E9ECEF',
-          300: '#DEE2E6',
-          400: '#CED4DA',
-          500: '#ADB5BD',
-          600: '#6C757D',
-          700: '#495057',
-          800: '#343A40',
-          900: '#212529',
+          100: '#f9fafb',
+          200: '#f3f4f6',
+          300: '#e5e7eb',
+          400: '#d1d5db',
+          500: '#9ca3af',
+          600: '#6b7280',
+          700: '#4b5563',
+          800: '#374151',
+          900: '#111827',
         }
       },
       fontFamily: {
         sans: ['Roboto', 'system-ui', 'sans-serif'],
-        serif: ['Roboto Slab', 'Georgia', 'serif'],
-        display: ['Playfair Display', 'Georgia', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        display: ['Roboto Condensed', 'system-ui', 'sans-serif'],
+        condensed: ['Roboto Condensed', 'system-ui', 'sans-serif'],
       },
       typography: {
         DEFAULT: {
@@ -43,17 +44,21 @@ export default {
             color: '#000000',
             lineHeight: '1.75',
             h2: {
-              fontFamily: 'Roboto Slab, Georgia, serif',
+              fontFamily: 'Playfair Display, Georgia, serif',
               fontWeight: '700',
+              borderBottom: '2px solid #b91c1c',
+              paddingBottom: '0.5rem',
             },
             h3: {
-              fontFamily: 'Roboto Slab, Georgia, serif',
+              fontFamily: 'Playfair Display, Georgia, serif',
               fontWeight: '600',
             },
             blockquote: {
               fontStyle: 'italic',
-              borderLeftColor: '#E63946',
+              borderLeftColor: '#b91c1c',
               borderLeftWidth: '4px',
+              backgroundColor: '#f9fafb',
+              padding: '1rem',
             },
           },
         },

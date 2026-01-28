@@ -1,170 +1,139 @@
 ---
-// short-singularity/src/pages/contact.astro
+// src/pages/contact.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MetaTags from '../components/seo/MetaTags.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
-import { Mail, Clock, MapPin, Send } from 'lucide-react';
+import { Mail, MessageSquare, Send, MapPin } from 'lucide-react';
 ---
 
 <BaseLayout 
   title="Contact Us | The People's Tribune"
-  description="Contact The People's Tribune - Get in touch with our editorial team via email at nilecomun@gmail.com"
+  description="Get in touch with The People's Tribune. Send us your inquiries, feedback, or join our editorial collective."
 >
   <Fragment slot="head">
     <MetaTags 
       title="Contact Us | The People's Tribune"
-      description="Contact The People's Tribune - Get in touch with our editorial team via email at nilecomun@gmail.com"
+      description="Get in touch with The People's Tribune. Send us your inquiries, feedback, or join our editorial collective."
       type="website"
       url="/contact"
     />
     <StructuredData type="section" />
   </Fragment>
 
-  <div class="container-custom py-12">
-    <!-- Hero Section -->
-    <section class="mb-16">
-      <div class="text-center max-w-4xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-6">
-          Contact Us
-        </h1>
-        <p class="text-xl text-gray-700 leading-relaxed">
-          We welcome your feedback, story ideas, and collaboration proposals. 
-          Your voice strengthens our collective struggle.
-        </p>
-      </div>
-    </section>
-
-    <!-- Main Contact Information -->
-    <section class="mb-16">
-      <div class="max-w-2xl mx-auto text-center">
-        <div class="bg-primary text-white p-12 rounded-lg">
-          <Mail className="w-16 h-16 mx-auto mb-6" />
-          <h2 class="text-3xl font-serif font-bold mb-4">Get in Touch</h2>
-          <p class="text-lg mb-8">
-            For all inquiries, please email us at:
-          </p>
-          <a 
-            href="mailto:nilecomun@gmail.com" 
-            class="text-3xl font-bold text-white hover:text-gray-200 transition-colors underline break-all"
-          >
-            nilecomun@gmail.com
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Guidelines -->
-    <section class="mb-16">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl font-serif font-bold mb-8 text-center">Contact Guidelines</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="font-serif font-bold text-xl mb-4 flex items-center gap-2">
-              <Send className="w-5 h-5 text-primary" />
-              When Emailing Us
-            </h3>
-            <ul class="space-y-2 text-gray-700">
-              <li>• Use a clear subject line</li>
-              <li>• Include your full name and contact info</li>
-              <li>• Be specific about your inquiry</li>
-              <li>• Allow 2-3 business days for response</li>
-            </ul>
-          </div>
-          
-          <div class="bg-gray-50 p-6 rounded-lg">
-            <h3 class="font-serif font-bold text-xl mb-4 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-primary" />
-              Response Times
-            </h3>
-            <ul class="space-y-2 text-gray-700">
-              <li>• General inquiries: 2-3 business days</li>
-              <li>• Story submissions: 1-2 weeks</li>
-              <li>• Correction requests: 24-48 hours</li>
-              <li>• Partnership proposals: 1 week</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Types of Inquiries -->
-    <section class="mb-16">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl font-serif font-bold mb-8 text-center">How We Can Help</h2>
-        
-        <div class="space-y-6">
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-lg mb-2">Story Tips & Ideas</h3>
-            <p class="text-gray-700">
-              Have a story idea or news tip? We're interested in workers' struggles, 
-              organizing efforts, and anti-imperialist analysis from around the world.
-            </p>
-          </div>
-          
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-lg mb-2">Feedback & Corrections</h3>
-            <p class="text-gray-700">
-              Found an error or have feedback on our content? We value reader input 
-              and are committed to accuracy in our reporting.
-            </p>
-          </div>
-          
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-lg mb-2">Partnerships & Collaboration</h3>
-            <p class="text-gray-700">
-              Interested in collaborating with The People's Tribune? We work with 
-              organizations and individuals advancing the socialist movement.
-            </p>
-          </div>
-          
-          <div class="border-l-4 border-primary pl-6">
-            <h3 class="font-serif font-bold text-lg mb-2">Technical Issues</h3>
-            <p class="text-gray-700">
-              Experiencing problems with our website or having trouble accessing 
-              content? Let us know and we'll address it promptly.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Our Communication -->
-    <section class="mb-16">
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-gray-50 p-8 rounded-lg">
-          <h3 class="font-serif font-bold text-xl mb-4 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-primary" />
-            About Our Communication
-          </h3>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            The People's Tribune is a digital publication with contributors and readers worldwide. 
-            We operate as a decentralized collective serving the global working class movement. 
-            Email allows us to maintain detailed records of all communications and ensure 
-            thoughtful responses to each inquiry.
-          </p>
-          <p class="text-gray-700">
-            We prioritize communication that advances the struggle for socialism and serves 
-            the needs of the working class movement. Your messages help us improve our 
-            coverage and better serve our readers.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final Call to Action -->
-    <section class="text-center">
-      <h2 class="text-2xl font-serif font-bold mb-4">Ready to Connect?</h2>
-      <p class="text-gray-700 mb-6">
-        We look forward to hearing from you and building this movement together.
+  <div class="bg-primary text-white py-16 border-b-8 border-black">
+    <div class="container-custom">
+      <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-4 transform -rotate-1">
+        Reach the <span class="bg-black px-4">Collective</span>
+      </h1>
+      <p class="text-2xl font-bold uppercase tracking-wide max-w-2xl">
+        Break the silence. Send us your reports, feedback, and inquiries.
       </p>
-      <a 
-        href="mailto:nilecomun@gmail.com" 
-        class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded-md font-bold hover:bg-primary-dark transition-colors text-lg"
-      >
-        <Mail className="w-5 h-5" />
-        Send Us an Email
-      </a>
-    </section>
+    </div>
+  </div>
+
+  <div class="container-custom py-16">
+    <div class="grid lg:grid-cols-12 gap-0 border-4 border-black">
+      
+      <div class="lg:col-span-5 bg-gray-100 p-10 border-b-4 lg:border-b-0 lg:border-r-4 border-black">
+        <h2 class="text-4xl font-black uppercase mb-8 underline decoration-primary decoration-4 underline-offset-4">
+          General Inquiries
+        </h2>
+        
+        <div class="space-y-10">
+          <div class="flex items-start gap-4 group">
+            <div class="bg-black text-white p-3 group-hover:bg-primary transition-colors">
+              <Mail className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="font-black uppercase text-xl">Email Us</h3>
+              <p class="text-gray-700 text-lg">contact@peoplestribune.org</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group">
+            <div class="bg-black text-white p-3 group-hover:bg-primary transition-colors">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="font-black uppercase text-xl">Press & Media</h3>
+              <p class="text-gray-700 text-lg">press@peoplestribune.org</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 group">
+            <div class="bg-black text-white p-3 group-hover:bg-primary transition-colors">
+              <MapPin className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 class="font-black uppercase text-xl">Headquarters</h3>
+              <p class="text-gray-700 text-lg italic">Organizing everywhere capitalism exploits.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 bg-black text-white p-6 transform rotate-1">
+          <h4 class="font-black uppercase text-xl mb-2">Join the Struggle</h4>
+          <p class="text-sm">We are always looking for dedicated writers, organizers, and translators to join our volunteer staff.</p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 p-10 bg-white">
+        <h2 class="text-4xl font-black uppercase mb-8">Send a Message</h2>
+        <form action="#" method="POST" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label for="name" class="font-black uppercase text-sm tracking-widest">Name / Pseudonym</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="w-full px-4 py-3 border-4 border-black focus:bg-primary focus:text-white focus:outline-none transition-all font-bold"
+                required
+              />
+            </div>
+            <div class="space-y-2">
+              <label for="email" class="font-black uppercase text-sm tracking-widest">Secure Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full px-4 py-3 border-4 border-black focus:bg-primary focus:text-white focus:outline-none transition-all font-bold"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label for="subject" class="font-black uppercase text-sm tracking-widest">Subject of Inquiry</label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              class="w-full px-4 py-3 border-4 border-black focus:bg-primary focus:text-white focus:outline-none transition-all font-bold"
+              required
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label for="message" class="font-black uppercase text-sm tracking-widest">Your Message</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              class="w-full px-4 py-3 border-4 border-black focus:bg-primary focus:text-white focus:outline-none transition-all font-bold"
+              required
+            ></textarea>
+          </div>
+
+          <button 
+            type="submit" 
+            class="w-full bg-black text-white py-4 px-8 font-black uppercase text-2xl flex items-center justify-center gap-3 hover:bg-primary hover:tracking-widest transition-all group"
+          >
+            Dispatch Message
+            <Send className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </BaseLayout>

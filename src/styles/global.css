@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;700;900&family=Roboto:wght@300;400;500;700;900&display=swap');
 
 @layer base {
   * {
@@ -12,7 +12,7 @@
   }
   
   body {
-    @apply bg-white text-black font-sans antialiased;
+    @apply bg-gray-50 text-black font-sans antialiased;
   }
 
   /* Print styles for articles */
@@ -51,7 +51,7 @@
   }
 
   .article-content h2 {
-    @apply text-3xl font-serif font-bold mt-8 mb-4 text-black;
+    @apply text-3xl font-serif font-bold mt-8 mb-4 text-black border-b-2 border-red-800 pb-2;
   }
 
   .article-content h3 {
@@ -67,7 +67,7 @@
   }
 
   .article-content blockquote {
-    @apply border-l-4 border-red-600 pl-6 py-4 my-8 italic text-xl font-serif text-gray-700;
+    @apply border-l-4 border-red-800 pl-6 py-4 my-8 italic text-xl font-serif text-gray-700 bg-gray-100;
   }
 
   .article-content img {
@@ -87,7 +87,7 @@
   }
 
   .masthead-title {
-    @apply font-serif font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-none;
+    @apply font-display font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-none;
   }
 
   .section-title {
@@ -100,5 +100,35 @@
 
   .article-subtitle {
     @apply font-serif text-2xl sm:text-3xl text-gray-700 mt-2;
+  }
+
+  /* New activist-inspired components */
+  .activist-banner {
+    @apply bg-red-900 text-white py-2 px-4 text-center font-bold text-sm tracking-wider;
+  }
+
+  .activist-card {
+    @apply bg-white border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden;
+  }
+
+  .activist-button {
+    @apply bg-red-800 hover:bg-red-900 text-white font-bold py-2 px-4 rounded transition-colors duration-200;
+  }
+
+  .activist-tag {
+    @apply inline-block bg-gray-800 text-white text-xs px-2 py-1 rounded font-bold uppercase tracking-wider;
+  }
+
+  .news-wire {
+    @apply bg-gray-900 text-white p-4 border-l-4 border-red-800;
+  }
+
+  .featured-story {
+    @apply relative overflow-hidden bg-white;
+  }
+
+  .featured-story::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-red-800;
   }
 }

@@ -1,89 +1,77 @@
 ---
-// short-singularity/src/components/layout/Footer.astro
+// src/components/layout/Footer.astro
 import sections from '../../data/sections.json';
 ---
 
-<footer class="bg-secondary text-white mt-16">
-  <div class="container-custom py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <!-- About -->
-      <div class="md:col-span-2">
-        <h3 class="text-xl font-serif font-bold mb-4">The People's Tribune</h3>
-        <p class="text-sm leading-relaxed mb-4">
-          A Marxist-Leninist newspaper committed to working-class journalism, 
-          anti-imperialist analysis, and the struggle for socialism.
+<footer class="bg-black text-white mt-20 border-t-8 border-primary">
+  <div class="container-custom py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div class="md:col-span-5 space-y-6">
+        <h3 class="text-4xl font-black uppercase tracking-tighter italic">
+          The People's <span class="text-primary">Tribune</span>
+        </h3>
+        <p class="text-lg font-bold leading-tight border-l-4 border-primary pl-4 max-w-sm">
+          A weapon of the working class. Committed to Marxist-Leninist analysis and the global anti-imperialist struggle.
         </p>
 
-        <!-- YouTube -->
-        <div class="mt-6">
+        <div class="pt-4">
           <a
             href="https://www.youtube.com/@ThePeoplesTribune"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-gray-400 hover:text-white transition-colors"
-            aria-label="The People's Tribune on YouTube"
+            class="inline-flex items-center gap-3 bg-white text-black px-4 py-2 font-black uppercase text-sm hover:bg-primary hover:text-white transition-all"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.118C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.393.568A2.99 2.99 0 0 0 .502 6.186 31.02 31.02 0 0 0 0 12a31.02 31.02 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.105 2.118C4.495 20.5 12 20.5 12 20.5s7.505 0 9.393-.568a2.99 2.99 0 0 0 2.105-2.118A31.02 31.02 0 0 0 24 12a31.02 31.02 0 0 0-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a2.99 2.99 0 0 0-2.105-2.105C19.535 3.507 12 3.507 12 3.507s-7.535 0-9.393.574c-.818.232-1.637 1.05-2.105 2.105C0 8.044 0 12 0 12s0 3.956.502 5.814c.232.818 1.05 1.637 2.105 2.105C4.465 20.493 12 20.493 12 20.493s7.535 0 9.393-.574a2.99 2.99 0 0 0 2.105-2.105C24 15.956 24 12 24 12s0-3.956-.502-5.814zM9.546 15.568V8.432L15.818 12l-6.272 3.568z"/>
             </svg>
+            Broadcasts
           </a>
         </div>
       </div>
 
-      <!-- Sections -->
-      <div>
-        <h3 class="text-lg font-serif font-bold mb-4">Sections</h3>
-        <ul class="space-y-2 text-sm">
-          {sections.map(section => (
-            <li>
-              <a 
-                href={`/sections/${section.slug}`}
-                class="hover:text-primary transition-colors"
-              >
-                {section.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div class="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="text-primary font-black uppercase text-xs tracking-[0.2em] mb-6">Theaters</h4>
+          <ul class="space-y-3">
+            {sections.map((section) => (
+              <li>
+                <a 
+                  href={`/sections/${section.slug}`} 
+                  class="font-bold uppercase text-sm hover:text-primary transition-colors block"
+                >
+                  {section.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <!-- Contact & Info -->
-      <div>
-        <h3 class="text-lg font-serif font-bold mb-4">Connect</h3>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href="/about" class="hover:text-primary transition-colors">
-              About Us
-            </a>
-          </li>
-          <li>
-            <a href="/editorial-policy" class="hover:text-primary transition-colors">
-              Editorial Policy
-            </a>
-          </li>
-          <li>
-            <a href="/contact" class="hover:text-primary transition-colors">
-              Contact
-            </a>
-          </li>
-          <li>
-            <a href="/submit" class="hover:text-primary transition-colors">
-              Submit an Article
-            </a>
-          </li>
-        </ul>
+        <div>
+          <h4 class="text-primary font-black uppercase text-xs tracking-[0.2em] mb-6">Manifesto</h4>
+          <ul class="space-y-3 font-bold uppercase text-sm">
+            <li><a href="/about" class="hover:text-primary transition-colors">About Us</a></li>
+            <li><a href="/editorial-policy" class="hover:text-primary transition-colors">Protocol</a></li>
+            <li><a href="/submit" class="hover:text-primary transition-colors">Dispatches</a></li>
+            <li><a href="/contact" class="hover:text-primary transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="col-span-2 md:col-span-1">
+            <div class="border-2 border-primary p-4 transform -rotate-2">
+                <p class="text-[10px] font-black uppercase mb-2">Internal Circular</p>
+                <p class="text-xs font-bold italic">"The philosophers have only interpreted the world, in various ways. The point, however, is to change it."</p>
+            </div>
+        </div>
       </div>
     </div>
 
-    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-      <p>
-        &copy; {new Date().getFullYear()} The People's Tribune. 
-        All content is freely available for educational and organizing purposes.
-      </p>
-      <p class="mt-2 italic text-xs">
-        "The philosophers have only interpreted the world, in various ways. 
-        The point, however, is to change it." — Karl Marx
-      </p>
+    <div class="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-[10px] font-black uppercase tracking-widest text-gray-500">
+        &copy; {new Date().getFullYear()} The People's Tribune // No Rights Reserved for the People
+      </div>
+      <div class="flex gap-6">
+        <span class="text-[10px] font-black uppercase tracking-widest text-primary">Workers of the World Unite</span>
+      </div>
     </div>
   </div>
 </footer>
