@@ -25,6 +25,20 @@ const recentArticles = allArticles
   .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
   .slice(0, 6);
 
+// Get ALL remaining articles not shown in previous sections
+const allRemainingArticles = allArticles
+  .filter(a => a.status === 'published')
+  .filter(article => 
+    !leadArticle || article.id !== leadArticle.id
+  )
+  .filter(article => 
+    !featuredArticles.some(fa => fa.id === article.id)
+  )
+  .filter(article => 
+    !recentArticles.some(ra => ra.id === article.id)
+  )
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
 function getAuthor(authorId: string): Author {
   return allAuthors.find(a => a.id === authorId) || allAuthors[0];
 }
@@ -34,6 +48,22 @@ const getImgSrc = (article: Article) => {
   if (article.featuredImage?.src) return article.featuredImage.src;
   // @ts-ignore - fallback for different JSON structures
   return article.image || '/placeholder.jpg';
+};
+
+// Calculate reading time for an article
+const calculateReadingTime = (content: any[]) => {
+  if (!content || !Array.isArray(content)) return 3;
+  
+  let wordCount = 0;
+  content.forEach(item => {
+    if (item.type === 'paragraph' && item.text) {
+      wordCount += item.text.split(' ').length;
+    } else if (item.type === 'heading' && item.text) {
+      wordCount += item.text.split(' ').length;
+    }
+  });
+  
+  return Math.max(1, Math.ceil(wordCount / 200)); // 200 words per minute
 };
 ---
 
@@ -73,13 +103,22 @@ const getImgSrc = (article: Article) => {
                 {leadArticle.excerpt}
               </p>
             </a>
-            <div class="flex items-center gap-4 border-t-2 border-black pt-6">
+            <div class="flex items-center justify-between border-t-2 border-black pt-6">
               <div class="font-black uppercase text-sm tracking-tighter text-black">
                 By <span class="text-primary">{getAuthor(leadArticle.authorId).name}</span>
               </div>
-              <div class="h-1 w-1 bg-black rounded-full"></div>
-              <div class="font-bold text-xs uppercase text-gray-500">
-                {new Date(leadArticle.publishedAt).toLocaleDateString()}
+              <div class="flex items-center gap-4">
+                <div class="font-bold text-xs uppercase text-gray-500">
+                  {new Date(leadArticle.publishedAt).toLocaleDateString()}
+                </div>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <span class="font-bold text-xs uppercase text-gray-500">
+                    {calculateReadingTime(leadArticle.content)} MIN READ
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -90,6 +129,11 @@ const getImgSrc = (article: Article) => {
               class="absolute inset-0 w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-500"
             />
             <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <p class="text-white font-bold text-sm">
+                {leadArticle.featuredImage?.caption || ''}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -104,10 +148,13 @@ const getImgSrc = (article: Article) => {
           <div class="flex items-end gap-4 mb-10 border-b-4 border-black pb-2">
             <h2 class="text-4xl font-black uppercase tracking-tighter">Featured Analysis</h2>
             <div class="flex-1 h-2 bg-primary mb-2"></div>
+            <span class="text-sm font-black uppercase text-gray-500">
+              {featuredArticles.length} ARTICLES
+            </span>
           </div>
-          <div class="grid sm:grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-2 gap-8">
             {featuredArticles.map(article => (
-              <div class="border-b-2 border-gray-200 pb-8 last:border-0 sm:last:border-b-2">
+              <div class="h-full">
                 <ArticleCard 
                   article={article}
                   author={getAuthor(article.authorId)}
@@ -123,31 +170,53 @@ const getImgSrc = (article: Article) => {
           <div class="flex items-end gap-4 mb-10 border-b-4 border-black pb-2">
             <h2 class="text-4xl font-black uppercase tracking-tighter">Recent Dispatches</h2>
             <div class="flex-1 h-2 bg-black mb-2"></div>
+            <span class="text-sm font-black uppercase text-gray-500">
+              {recentArticles.length} ARTICLES
+            </span>
           </div>
-          <div class="grid gap-12">
+          <div class="grid md:grid-cols-2 gap-8">
             {recentArticles.map(article => (
-              <div class="flex flex-col md:flex-row gap-8 items-start group">
-                <div class="w-full md:w-48 h-32 bg-gray-200 flex-shrink-0 border-2 border-black overflow-hidden relative">
-                   <img 
-                    src={getImgSrc(article)} 
-                    alt={article.title}
-                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" 
-                   />
-                </div>
-                <div class="flex-1">
-                   <h3 class="text-2xl font-black uppercase mb-2 group-hover:text-primary transition-colors leading-tight">
-                     <a href={`/articles/${article.slug}`}>{article.title}</a>
-                   </h3>
-                   <p class="text-gray-600 line-clamp-2 font-bold text-sm mb-4 leading-relaxed">{article.excerpt}</p>
-                   <div class="text-[10px] uppercase font-black tracking-widest text-primary flex items-center gap-2">
-                      <span class="bg-primary text-white px-1">CONTRIBUTOR</span>
-                      Filed by {getAuthor(article.authorId).name}
-                   </div>
-                </div>
+              <div class="h-full">
+                <ArticleCard 
+                  article={article}
+                  author={getAuthor(article.authorId)}
+                  featured={false}
+                  size="medium"
+                />
               </div>
             ))}
           </div>
         </section>
+
+        {allRemainingArticles.length > 0 && (
+          <section>
+            <div class="flex items-end gap-4 mb-10 border-b-4 border-black pb-2">
+              <h2 class="text-4xl font-black uppercase tracking-tighter">Complete Archive</h2>
+              <div class="flex-1 h-2 bg-gray-400 mb-2"></div>
+              <span class="text-sm font-black uppercase text-gray-500">
+                {allRemainingArticles.length} ARTICLES
+              </span>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+              {allRemainingArticles.map((article) => (
+                <div class="h-full">
+                  <ArticleCard 
+                    article={article}
+                    author={getAuthor(article.authorId)}
+                    featured={false}
+                    size="medium"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            <div class="mt-8 text-center">
+              <a href="/archive" class="inline-block border-4 border-black px-8 py-3 font-black uppercase bg-white hover:bg-primary hover:text-white transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                View Full Archive
+              </a>
+            </div>
+          </section>
+        )}
       </div>
 
       <aside class="lg:col-span-1 space-y-12">
@@ -162,7 +231,7 @@ const getImgSrc = (article: Article) => {
         <div class="border-4 border-black p-6 bg-white">
           <h3 class="text-xl font-black uppercase mb-6 border-b-2 border-black pb-2">Top Sections</h3>
           <ul class="space-y-4">
-            {['Anti-Imperialism', 'Labor Struggles', 'Theoretical Analysis', 'Global Reports'].map(section => (
+            {['World', 'Labor', 'Analysis', 'Imperialism'].map(section => (
               <li>
                 <a href={`/sections/${section.toLowerCase().replace(' ', '-')}`} class="flex justify-between items-center group">
                   <span class="font-black uppercase group-hover:text-primary transition-colors">{section}</span>
@@ -173,6 +242,49 @@ const getImgSrc = (article: Article) => {
           </ul>
         </div>
 
+        <div class="border-4 border-black bg-white">
+          <div class="bg-primary text-black p-4">
+            <h3 class="font-black uppercase text-lg">Archive Statistics</h3>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between items-center border-b-2 border-gray-200 pb-2">
+              <span class="font-bold uppercase text-sm">Total Articles</span>
+              <span class="font-black text-xl text-primary">{allArticles.filter(a => a.status === 'published').length}</span>
+            </div>
+            <div class="flex justify-between items-center border-b-2 border-gray-200 pb-2">
+              <span class="font-bold uppercase text-sm">This Month</span>
+              <span class="font-black text-xl text-primary">
+                {allArticles.filter(a => {
+                  const pubDate = new Date(a.publishedAt);
+                  const now = new Date();
+                  return a.status === 'published' && 
+                         pubDate.getMonth() === now.getMonth() && 
+                         pubDate.getFullYear() === now.getFullYear();
+                }).length}
+              </span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="font-bold uppercase text-sm">Contributors</span>
+              <span class="font-black text-xl text-primary">{allAuthors.length}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-4 border-black bg-white">
+          <div class="bg-black text-white p-4">
+            <h3 class="font-black uppercase text-lg">Trending Topics</h3>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              {['Imperialism', 'Class Struggle', 'Labor Rights', 'Anti-War', 'Socialism', 'Revolution'].map(tag => (
+                <a href={`/tags/${tag.toLowerCase().replace(' ', '-')}`} class="px-3 py-1 bg-gray-100 border-2 border-black font-black uppercase text-xs hover:bg-primary hover:text-white transition-all">
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div class="sticky top-40">
            <div class="bg-primary text-white p-6 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
               <h3 class="font-black uppercase text-xl mb-2">Support the Press</h3>
@@ -181,7 +293,7 @@ const getImgSrc = (article: Article) => {
                 Donate to the Cause
               </button>
            </div>
-           <div class="mt-8 p-4 border-2 border-dashed border-black text-[10px] font-bold uppercase italic text-gray-400">
+           <div class="mt-8 p-4 border-2 border-dashed border-black text-[10px] font-black uppercase italic text-gray-400">
              End of column // Broadcast remains active 24/7
            </div>
         </div>
@@ -197,5 +309,19 @@ const getImgSrc = (article: Article) => {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 1.5rem;
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>

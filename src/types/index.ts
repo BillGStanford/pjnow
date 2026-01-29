@@ -29,6 +29,11 @@ export interface Source {
   url?: string;
 }
 
+export interface EmbeddedLink {
+  text: string;
+  url: string;
+}
+
 export type ContentBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'heading'; level: 2 | 3 | 4; text: string }
@@ -58,6 +63,7 @@ export interface Article {
     metaDescription: string;
   };
   sources?: Source[];
+  embeddedLinks?: EmbeddedLink[];
 }
 
 export interface SiteConfig {

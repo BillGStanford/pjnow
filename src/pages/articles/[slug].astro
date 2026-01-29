@@ -6,7 +6,7 @@ import StructuredData from '../../components/seo/StructuredData.astro';
 import ArticleCard from '../../components/article/ArticleCard.astro';
 import { ContentRenderer } from '../../utils/contentRenderer';
 import { formatDate, getReadingTime } from '../../utils/date';
-import { Clock, Share2, BookOpen, ArrowDown } from 'lucide-react';
+import { Clock, Share2, BookOpen, ArrowDown, ExternalLink } from 'lucide-react';
 import articles from '../../data/articles.json';
 import authors from '../../data/authors.json';
 import sections from '../../data/sections.json';
@@ -112,17 +112,62 @@ function getArticleAuthor(authorId: string): Author {
               </figure>
             )}
 
-            <ContentRenderer content={article.content} />
+            <ContentRenderer content={article.content} embeddedLinks={article.embeddedLinks || []} />
 
             <section id="bibliography" class="mt-20 pt-12 border-t-8 border-black">
                <h3 class="text-2xl font-black uppercase tracking-tighter italic mb-8 flex items-center gap-4">
                  <BookOpen className="text-primary" /> Sources & References
                </h3>
-               <ul class="space-y-4 text-sm font-bold italic text-gray-600">
-                 <li>[1] Central Archive for Socialist Documentation, {new Date().getFullYear()}.</li>
-                 <li>[2] Analysis of Global Production Chains, Field Study.</li>
-                 <li>[3] Materialist Reports from the Anti-Imperialist Front.</li>
-               </ul>
+               <div class="space-y-6">
+                 <div class="bg-gray-50 p-6 border-4 border-black">
+                   <h4 class="font-black uppercase text-sm tracking-wider mb-4 text-primary">Embedded Links</h4>
+                   <ul class="space-y-3">
+                     {article.embeddedLinks && article.embeddedLinks.length > 0 ? (
+                       article.embeddedLinks.map((link, index) => (
+                         <li class="flex items-start gap-3">
+                           <span class="text-primary font-black">[{index + 1}]</span>
+                           <div>
+                             <a href={link.url} target="_blank" rel="noopener noreferrer" class="font-bold text-gray-800 hover:text-primary transition-colors flex items-center gap-2">
+                               {link.text}
+                               <ExternalLink className="w-3 h-3" />
+                             </a>
+                           </div>
+                         </li>
+                       ))
+                     ) : (
+                       <li class="text-gray-600 italic">No embedded links in this article</li>
+                     )}
+                   </ul>
+                 </div>
+                 
+                 <div class="bg-gray-50 p-6 border-4 border-black">
+                   <h4 class="font-black uppercase text-sm tracking-wider mb-4 text-primary">References</h4>
+                   <ul class="space-y-3">
+                     {article.sources && article.sources.length > 0 ? (
+                       article.sources.map((source, index) => (
+                         <li class="flex items-start gap-3">
+                           <span class="text-primary font-black">[{index + 1}]</span>
+                           <div>
+                             {source.url ? (
+                               <a href={source.url} target="_blank" rel="noopener noreferrer" class="font-bold text-gray-800 hover:text-primary transition-colors flex items-center gap-2">
+                                 {source.title}
+                                 <ExternalLink className="w-3 h-3" />
+                               </a>
+                             ) : (
+                               <span class="font-bold text-gray-800">{source.title}</span>
+                             )}
+                             {source.author && <p class="text-xs text-gray-600 mt-1">By {source.author}</p>}
+                             {source.year && <p class="text-xs text-gray-600">Published: {source.year}</p>}
+                             {source.publisher && <p class="text-xs text-gray-600">Publisher: {source.publisher}</p>}
+                           </div>
+                         </li>
+                       ))
+                     ) : (
+                       <li class="text-gray-600 italic">No sources cited in this article</li>
+                     )}
+                   </ul>
+                 </div>
+               </div>
             </section>
           </div>
         </main>
@@ -189,5 +234,22 @@ function getArticleAuthor(authorId: string): Author {
   }
   .vertical-text {
     writing-mode: vertical-rl;
+  }
+  .article-content a {
+    color: #CC0000;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  .article-content a:hover {
+    color: #000;
+  }
+  .article-content strong {
+    font-weight: bold;
+  }
+  .article-content em {
+    font-style: italic;
+  }
+  .article-content u {
+    text-decoration: underline;
   }
 </style>
